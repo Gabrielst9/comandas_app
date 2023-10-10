@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Method Not Allowed{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h1>Método não permitido!</h1>
+        <h3>O método de solicitação é conhecido pelo servidor, mas foi desativado e não pode ser usado.</h3>
+    </div>
+</div>
+
+<figure>
+    <img src="{{ url_for('static', filename='Erro405.jpg') }}" alt="Erro 405">
+</figure>
+
+<div class="row">
+    <div class="col">
+        {# mostra a mensagem de erro retornada #}
+        <p>{{ erroHttp }}</p>
+    </div>
+</div>
+{% endblock %}
