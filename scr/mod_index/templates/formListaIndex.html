@@ -5,15 +5,19 @@
     <head>
         <meta charset="UTF-8">
         <title>HOME</title>
+
+        <link rel="stylesheet" href="./style.css" />
     </head>
 
     <body>
-        <h1>HOME</h1>
-        <ul>
-            <li><a href="{{ url_for('index.formListaIndex') }}">Home</a></li>
-            <li><a href="{{ url_for('funcionario.formListaFuncionario') }}">Funcionário</a></li>
-            <li><a href="{{ url_for('cliente.formListaCliente') }}">Cliente</a></li>
-            <li><a href="{{ url_for('produto.formListaProduto') }}">Produto</a></li>
-        </ul>
+        {% extends "base.html" %}
+
+        {% block title %}HOME{% endblock %}
+        
+        {% block content %}
+        <form action="{{ url_for('index.formListaIndex') }}" method="POST">
+            <h1>HOME</h1>
+        </form>
+        {% endblock %}
     </body>
 </html>
