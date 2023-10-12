@@ -1,0 +1,31 @@
+.botao{
+    background-color: blueviolet;
+}
+
+body{
+    color: beige;
+    background-image: url('../img/stacked-peaks-haikei.svg');
+}
+
+
+.border{
+    border: inset rgba(250, 236, 43, 0.932) !important;
+}
+
+
+.card:hover,
+.card:focus {
+  background-size: 0 0.1em, 100% 0.1em;
+}
+
+.card{
+    cursor: pointer;
+    border: inset rgba(250, 236, 43, 0.932) 0.5px!important;
+    background: 
+      linear-gradient(to right, rgb(18, 33, 41), rgb(0, 0, 0)),
+      linear-gradient(to right, rgba(255, 0, 0, 1), rgba(255, 0, 180, 1), rgba(0, 100, 200, 1));
+    background-size: 100% 100%, 0 1em;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 400ms;
+}
