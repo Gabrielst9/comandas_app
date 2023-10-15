@@ -29,3 +29,18 @@ body{
     background-repeat: no-repeat;
     transition: background-size 400ms;
 }
+
+.input{
+  transition: all 0.5s ease;
+}
+
+
+.input:focus {
+  top: -23px;
+  font-size: 23px;
+}
+
+.img-fluid{
+  max-width: 50%;
+  max-height: 50%;
+}

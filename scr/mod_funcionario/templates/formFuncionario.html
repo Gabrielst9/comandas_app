@@ -3,48 +3,85 @@
 {% block title %}Funcionário{% endblock %}
 
 {% block content %}
-<form name="formAdicionar" id="formAdicionar" action="" method="POST">
-    <h1>Funcionário</h1>
-
-    <div class="form-group mb-3 position-relative">
+<form name="formAdicionar" class="d-flex mt-4 justify-content-center" id="formAdicionar" action="" method="POST">
+    <div class="form-group mb-3 position-relative col-6">
+        <!-- Titulo -->
+        <h1>Funcionário</h1>
         
-        <label class="form-label" for="id">Código</label>
-        <input class="form-control"type="text" name="id" id="id" value="" placeholder="Código"  readonly>
-    
+        
+        <!-- ID (Código) -->
+        <!--================================================================================================-->
+            <label class="form-label" for="id">Código</label>
+            <input class="form-control"type="text" name="id" id="id" value="" placeholder="Código"  readonly disabled>
+        <!--================================================================================================-->
+        
+        
+        <!-- Nome -->
+        <!--================================================================================================-->
         <br>
-        <label class="form-label" for="nome">Nome Funcionário</la>
+        <label class="form-label" for="nome">Nome Funcionário</label>
         <input class="form-control"
         type="text" name="nome" id="nome" value="" placeholder="Nome Funcionário" maxlength="100" autofocus required>
+        <!--================================================================================================-->
+        
+
+        <!-- Matrícula -->
+        <!--================================================================================================-->
         <br>
         <label class="form-label" for="matricula">Matrícula</label>
         <input type="text" class="form-control" name="matricula" id="matricula" value="" placeholder="Matrícula" maxlength="15" required>
-    
+        <!--================================================================================================-->
+        
+        
+        <!-- CPF -->
+        <!--================================================================================================-->
         <br>
         <label class="form-label" for="cpf">CPF</label>
-        <input type="text" class="form-control" name="cpf" id="cpf" value="" placeholder="CPF" maxlength="15" required>
+        <input type="text" class="form-control input" name="cpf" id="cpf" value="" placeholder="Ex.: 000.000.000-00" maxlength="11" required>
+        <!--================================================================================================-->    
         
+        
+        <!-- Telefone -->
+        <!--================================================================================================-->    
         <br>
         <label  class="form-label"for="telefone" class="form-label">Telefone</label>
-        <input  class="form-control" type="tel" name="telefone" id="telefone" value="" placeholder="Telefone" maxlength="15" required>
-        
+        <input  class="form-control input" type="tel" name="telefone" id="telefone" value="" placeholder="Ex.: (00) 0000-0000" maxlength="11" required>    
+        <!--================================================================================================-->
+
+
+        <!-- Grupo -->
+        <!--================================================================================================-->
         <br>
         <label class="form-label" for="grupo">Grupo</label>
         <select class="form-select w-50" name="grupo" id="grupo" aria-label="Grupo">
             <option value="0">Atendente</option>
             <option value="1">Caixa</option>
             <option value="2">Adm</option>
-        </select>
+        </select>    
+        <!--================================================================================================-->
+
+        <!-- Senha -->
+        <!--================================================================================================-->
+        <br>
+        <label class="form-label" for="senha">Senha</label>
+        <input class="form-control input" type="password" name="senha" id="senha" value="Bolinhas" placeholder="Senha" required>
+        <!--================================================================================================-->
+
+
+        <!-- Confirmar Senha -->
+        <!--================================================================================================-->    
+        <br>
+        <label for="resenha">Confirmar Senha</label>
+        <input class="form-control input" type="password" name="resenha" id="resenha" value="Bolinhas" placeholder="Senha" required>
+        <!--================================================================================================-->
+        
+        
+        <!-- Botao de Salvar -->
+        <!--================================================================================================-->
+        <br>
+        <button class="botao btn btn-outline-primary text-light px-5" type='submit' name='salvaUsuarioDB' id='salvaUsuarioDB'><i class='fas fa-save'></i> Salvar</button>
+        <!--================================================================================================-->
     
-    <br>
-    <label class="form-label" for="senha">Senha</label>
-    <input class="form-control" type="password" name="senha" id="senha" value="Bolinhas" placeholder="Senha" required>
-    
-    <br>
-    <label for="resenha">Confirmar Senha</label>
-    <input class="form-control" type="password" name="resenha" id="resenha" value="Bolinhas" placeholder="Senha" required>
-    
-    <br>
-    <button class="botao btn btn-outline-primary text-light px-5" type='submit' name='salvaUsuarioDB' id='salvaUsuarioDB'><i class='fas fa-save'></i> Salvar</button>
-</div>
+    </div>
 </form>
 {% endblock %}
