@@ -6,6 +6,10 @@ bp_produto = Blueprint('produto', __name__, url_prefix="/produto", template_fold
 def formListaProduto():
     return render_template('formListaProduto.html'), 200
 
+@bp_produto.route('/form-Produto/', methods=['POST'])
+def formProduto():
+    return render_template('formProduto.html')
+
 '''
 Rota antiga de app...
 @app.route('/')

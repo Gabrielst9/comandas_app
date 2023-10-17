@@ -1,15 +1,21 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
+
 <html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Index</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>HOME</title>
+        {% block title %}HOME{% endblock %}
 
-<body>
-    <h1>Rota da página Inicial da nossa WEB APP</h1>
-    <h1>Gabriel Tavares</h1>
-    <h1>Uso de render_template</h1>
-</body>
+        <link rel="stylesheet" href="./style.css" />
+    </head>
 
+    <body>
+        {% block content %}
+        <form action="{{ url_for('index.formListaIndex') }}" method="POST">
+            <h1>HOME</h1>
+        </form>
+        {% endblock %}
+    </body>
 </html>

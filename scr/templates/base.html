@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>{% block title %}{% endblock %} - Pizzaria do Zé</title>
+    
+    {% block style %}{% endblock %}
+        <style>
+            .important 
+            {
+                color: #6495ED;
+            }
+        </style>
+
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.3.2-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-6.4.2-web/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='script/script.js') }}"></script>
+</head>
+
+<body>
+    <!--Bloco de Menu----------------------------------------------------------------------------------> 
+    {% block menu %}
+      
+    <nav class="border navbar navbar-expand-lg bg-dark ">
+            <div class="container ">
+                <a class=" text-warning navbar-brand fw-semibold" 
+                  >Pizzaria-Zé<i class="text-primary ms-2"></i
+                ></a>
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse">
+                  <div class="links w-100 text-center">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="card nav-item"><a 
+                                class="nav-link text-warning"
+                                href="{{ url_for('index.formListaIndex') }}">
+                            <i class="fas fa-home"></i> HOME</a>
+                        </li>
+    
+                        <li class="card nav-item"><a 
+                            class="nav-link text-warning"
+                            href="{{ url_for('funcionario.formListaFuncionario') }}"><i class="fas fa-cart-arrow-down">    
+                            </i> FUNCIONÁRIOS</a>
+                        </li>
+    
+                        <li class="card nav-item"><a 
+                            class="nav-link text-warning"
+                            href="{{ url_for('cliente.formListaCliente') }}"><i class="fas fa-users">
+                            </i> CLIENTES</a>
+                        </li>
+    
+                        <li class="card nav-item"><a 
+                            class="nav-link text-warning"
+                            href="{{ url_for('produto.formListaProduto') }}"><i class="fas fa-pizza-slice">
+                            </i> PRODUTOS</a>
+                        </li>
+                    </ul>
+                  </div>
+                </div>
+                
+              </div>
+        </nav>
+   
+    
+
+    {% endblock %}
+    <!--------------------------------------------------------------------------------------------------> 
+
+    <div class="container-fluid mt-3">
+        {% block content %}{% endblock %}
+        <br><br><br>
+    </div>
+    
+    <!---Roda-pé ----------------------------------------------------------------------------------> 
+    {% block footer %}
+        <a href="{{ url_for('index.formListaIndex') }}">&copy; 2023 by Gabriel Tavares</a>
+    {% endblock %}
+    <!--------------------------------------------------------------------------------------------------> 
+
+    <!-- Importação do Js -->
+    {% block js %}
+    {% endblock %}
+    <script src="{{ url_for('static', filename='bootstrap-5.3.2-dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='fontawesome-free-6.4.2-web/js/all.js') }}"></script>
+    
+    <!-- Biblioteca JQuery, colocação de máscaras nos campos -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+    
+    <!-- Mascaras dos campos -->
+    <script>
+        $('#cpf').mask('000.000.000-00');
+        $('#cep').mask('00000-000');
+        $('#telefone').mask('(00) 0000-0000');
+    </script>
+
+<!--    
+    $('.date').mask('00/00/0000');
+    $('.time').mask('00:00:00');
+    $('.date_time').mask('00/00/0000 00:00:00');
+    $('.cep').mask('00000-000');
+    $('.phone').mask('0000-0000');
+    $('.phone_with_ddd').mask('(00) 0000-0000');
+    $('.phone_us').mask('(000) 000-0000');
+    $('.mixed').mask('AAA 000-S0S');
+    $('.cpf').mask('000.000.000-00', {reverse: true});
+    $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
+    $('.money').mask('000.000.000.000.000,00', {reverse: true});
+    $('.money2').mask("#.##0,00", {reverse: true});
+-->
+</body>
+
+</html>
