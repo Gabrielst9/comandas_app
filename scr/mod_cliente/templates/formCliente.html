@@ -1,91 +1,107 @@
 {% extends "base.html" %}
-{% block title %}Cliente{% endblock %}
+
+{% block title %} Cliente {% endblock %}
+
+{# ajusta as variáveis conforme novo ou edit #}
+{% set id = result[0].id_cliente if result else '0' %}
+{% set nome = result[0].nome if result else '' %}
+{% set cpf = result[0].cpf if result else '' %}
+{% set telefone = result[0].telefone if result else '' %}
+{% set compra_fiado = result[0].compra_fiado if result else '' %}
+{% set dia_fiado = result[0].dia_fiado if result else '' %}
+{% set senha = result[0].senha if result else '' %}
 
 {% block content %}
-<form name="formAdicionar" class="d-flex mt-4 justify-content-center" id="formAdicionar" action="{{ url_for('cliente.insert') }}" method="POST">
+<form class="d-flex mt-4 justify-content-center"
+        name="{{ 'formEditar' if result else 'formAdicionar' }}" 
+        id="{{ 'formEditar' if result else 'formAdicionar' }}"
+        action="{{ url_for('cliente.edit') if result else url_for('cliente.insert') }}"
+        method="POST">
     
     <div class="form-group mb-3 position-relative col-6">
         <!-- Titulo -->
-            <h1>Cliente</h1>
-        
+            <h1>Cliente - {{ "%s: %s" % ('Editar Registro', id) if result else 'Novo' }}</h1>
+
         
         <!-- ID (Código) -->
         <!--================================================================================================-->
             <label class="form-label" for="id">Código</label>
-            <input class="form-control"type="text" name="id" id="id" value="0" placeholder="Código" readonly>
+            <input class="form-control"type="text" name="id" id="id" value="{{ id }}" placeholder="Código" readonly>
         <!--================================================================================================-->
     
+
     
         <!-- Nome -->
         <!--================================================================================================-->
             <br>
             <label class="form-label" for="nome">Nome Cliente</label>
             <input class="form-control input"
-            type="text" name="nome" id="nome" value="" placeholder="Nome Cliente" maxlength="100" autofocus required>
+            type="text" name="nome" id="nome" value="{{ nome }}" placeholder="Nome Cliente" maxlength="100" autofocus required>
         <!--================================================================================================-->
         
+
     
         <!-- CPF -->
         <!--================================================================================================-->
             <br>
             <label class="form-label" for="cpf">CPF</label>
-            <input type="text" class="form-control input" name="cpf" id="cpf" value="" placeholder="Ex.: 000.000.000-00" maxlength="11" required>
+            <input type="text" class="form-control input" 
+            name="cpf" id="cpf" value="{{ cpf }}" placeholder="Ex.: 000.000.000-00" maxlength="11" required>
         <!--================================================================================================-->    
         
         
+
         <!-- Telefone -->
         <!--================================================================================================-->    
             <br>
             <label  class="form-label"for="telefone" class="form-label">Telefone</label>
-            <input  class="form-control input" type="tel" name="telefone" id="telefone" value="" placeholder="Ex.: (00) 0000-0000" maxlength="11" required>    
+            <input  class="form-control input" type="tel" name="telefone" id="telefone" value="{{ telefone }}" placeholder="Ex.: (00) 0000-0000" maxlength="11" required>    
         <!--================================================================================================-->
         
         
+
         <!-- Compra Fiado -->
         <!--================================================================================================-->
-            <!-- Radio Compra Fiado -->
             <br>
-            <div class="form-group mb-3 position-relative" >
-                <label class="form-label" for="compra_fiado">Compra Fiado</label>
-                
-                <!------------------------------------------------------------------------>
-                <div class="d-flex align-items-center gap-2">
-                    <!-- Botão Sim -->
-                    <input class="form-radio" type="radio" name="compra_fiado" id="compra_fiado" value="0" required>
-                    Sim
-                    <!-- Botão Não -->
-                    <input class="form-radio" type="radio" name="compra_fiado" id="compra_fiado_1" value="1" required>
-                    Não
-                </div>
-                <!------------------------------------------------------------------------>
-            </div>
+            <label class="form-label" for="compra_fiado">Compra Fiado</label>
+            <select class="form-select w-50" name="compra_fiado" id="compra_fiado" aria-label="Compra_fiado">
+                <option value="{{ compra_fiado }}" selected>{{ compra_fiado }}</option>
+                <option value="0" >Sim</option>
+                <option value="1" >Não</option>
+            </select>  
         <!--================================================================================================-->
         
         
+
         <!-- Dia Fiado -->
         <!--================================================================================================-->
             <br>
             <label class="form-label" for="dia_fiado">Dia Fiado</label>
-            <input class="form-control input" type="date" name="dia_fiado" id="dia_fiado" value="">
+            <input class="form-control input" type="date" name="dia_fiado" id="dia_fiado" value="{{ dia_fiado }}">
         <!--================================================================================================-->
+
 
 
         <!-- Senha -->
         <!--================================================================================================-->
             <br>
             <label class="form-label" for="senha">Senha</label>
-            <input class="form-control input" type="password" name="senha" id="senha" value="Bolinhas" placeholder="Senha" required>
+            <input class="form-control input" type="password" name="senha" id="senha" value="{{ senha }}" placeholder="Senha" required>
         <!--================================================================================================-->
         
         
+
+
         <!-- Confirmar Senha -->
         <!--================================================================================================-->    
             <br>
             <label class="form-label" for="resenha">Confirmar Senha</label>
-            <input class="form-control input" type="password" name="resenha" id="resenha" value="Bolinhas" placeholder="Senha" required>
+            <input class="form-control input" type="password" name="resenha" id="resenha" value="" placeholder="Senha" required>
         <!--================================================================================================-->
             <span id='message'></span>
         
+
+
         <!-- Botao de Salvar -->
         <!--================================================================================================-->
         <br>
