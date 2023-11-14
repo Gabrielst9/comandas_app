@@ -2,52 +2,73 @@
 
 {% block title %}Funcionário{% endblock %}
 
+{# ajusta as variáveis conforme novo ou edit #}
+{% set id = result[0].id_funcionario if result else '0' %}
+{% set nome = result[0].nome if result else '' %}
+{% set matricula = result[0].matricula if result else '' %}
+{% set cpf = result[0].cpf if result else '' %}
+{% set telefone = result[0].telefone if result else '' %}
+{% set grupo = result[0].grupo if result else '' %}
+{% set senha = result[0].senha if result else '' %}
+
+
 {% block content %}
-<form name="formAdicionar" class="d-flex mt-4 justify-content-center" id="formAdicionar" action="{{ url_for('funcionario.insert') }}" method="POST">
-    
+<form class="d-flex mt-4 justify-content-center"
+        name="{{ 'formEditar' if result else 'formAdicionar' }}" 
+        id="{{ 'formEditar' if result else 'formAdicionar' }}"
+        action="{{ url_for('funcionario.edit') if result else url_for('funcionario.insert') }}"
+        method="POST">
+
+
     <div class="form-group mb-3 position-relative col-6">
         <!-- Titulo -->
-        <h1>Funcionário</h1>
+        <h1>Funcionário - {{ "%s: %s" % ('Editar Registro', id) if result else 'Novo' }}</h1>
         
-        
+
+
         <!-- ID (Código) -->
         <!--================================================================================================-->
             <label class="form-label" for="id">Código</label>
-            <input class="form-control"type="text" name="id" id="id" value="0" placeholder="Código" readonly>
+            <input class="form-control"type="text" name="id" id="id" value="{{ id }}" placeholder="Código" readonly>
         <!--================================================================================================-->
         
         
+
         <!-- Nome -->
         <!--================================================================================================-->
         <br>
         <label class="form-label" for="nome">Nome Funcionário</label>
         <input class="form-control input"
-        type="text" name="nome" id="nome" value="" placeholder="Nome Funcionário" maxlength="100" autofocus required>
+        type="text" name="nome" id="nome" value="{{ nome }}" placeholder="Nome Funcionário" maxlength="100" autofocus required>
         <!--================================================================================================-->
         
+
 
         <!-- Matrícula -->
         <!--================================================================================================-->
         <br>
         <label class="form-label" for="matricula">Matrícula</label>
-        <input type="text" class="form-control input" name="matricula" id="matricula" value="" placeholder="Matrícula" maxlength="15" required>
+        <input type="text" class="form-control input" name="matricula" id="matricula" value="{{ matricula }}" placeholder="Matrícula" maxlength="15" required>
         <!--================================================================================================-->
         
         
+
         <!-- CPF -->
         <!--================================================================================================-->
         <br>
         <label class="form-label" for="cpf">CPF</label>
-        <input type="text" class="form-control input" name="cpf" id="cpf" value="" placeholder="Ex.: 000.000.000-00" maxlength="11" required>
+        <input type="text" class="form-control input" name="cpf" id="cpf" value="{{ cpf }}" placeholder="Ex.: 000.000.000-00" maxlength="11" required>
         <!--================================================================================================-->    
         
         
+
         <!-- Telefone -->
         <!--================================================================================================-->    
         <br>
         <label  class="form-label"for="telefone" class="form-label">Telefone</label>
-        <input  class="form-control input" type="tel" name="telefone" id="telefone" value="" placeholder="Ex.: (00) 0000-0000" maxlength="11" required>    
+        <input  class="form-control input" type="tel" name="telefone" id="telefone" value="{{ telefone }}" placeholder="Ex.: (00) 0000-0000" maxlength="11" required>    
         <!--================================================================================================-->
+
 
 
         <!-- Grupo -->
@@ -55,28 +76,33 @@
         <br>
         <label class="form-label" for="grupo">Grupo</label>
         <select class="form-select w-50" name="grupo" id="grupo" aria-label="Grupo">
-            <option value="0">Atendente</option>
-            <option value="1">Caixa</option>
-            <option value="2">Adm</option>
+            <option value="{{ grupo }}" selected>{{ grupo }}</option>
+            <option value="0" >Atendente</option>
+            <option value="1" >Caixa</option>
+            <option value="2" >Adm</option>
         </select>    
         <!--================================================================================================-->
+
+
 
         <!-- Senha -->
         <!--================================================================================================-->
         <br>
         <label class="form-label" for="senha">Senha</label>
-        <input class="form-control input" type="password" name="senha" id="senha" value="Bolinhas" placeholder="Senha" required>
+        <input class="form-control input" type="password" name="senha" id="senha" value="{{ senha }}" placeholder="Senha" required>
         <!--================================================================================================-->
+
 
 
         <!-- Confirmar Senha -->
         <!--================================================================================================-->    
         <br>
         <label for="resenha">Confirmar Senha</label>
-        <input class="form-control input" type="password" name="resenha" id="resenha" value="Bolinhas" placeholder="Senha" required>
+        <input class="form-control input" type="password" name="resenha" id="resenha" value="" placeholder=" Confirmar Senha" required>
         <!--================================================================================================-->
         
         
+
         <!-- Botao de Salvar -->
         <!--================================================================================================-->
         <br>
@@ -84,5 +110,6 @@
         <!--================================================================================================-->
     
     </div>
+
 </form>
 {% endblock %}

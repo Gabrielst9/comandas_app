@@ -12,7 +12,6 @@ function carregarImagem()
     {
         var img = document.getElementById("img");
         img.src = event.target.result;
-        
     }
 }
 // __________________________________________________________________

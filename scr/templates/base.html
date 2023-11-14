@@ -121,7 +121,7 @@
 
 <!-- ____________________________________________________________________________________________________________________ -->
     <!-- Importação do Js -->
-    {% block js %}
+
         <!-- Importação do bootstrap.js -->
         <script src="{{ url_for('static', filename='bootstrap-5.3.2-dist/js/bootstrap.min.js') }}"></script>
 
@@ -131,16 +131,16 @@
         <!-- Biblioteca JQuery, colocação de máscaras nos campos -->
         <!-- Importação do JQuery -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
         <!-- Importação do JQuery Mask -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
 
         <!-- Importação do sweetalert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="sweetalert2.all.min.js"></script>
-    {% endblock %}
+    
 <!-- ____________________________________________________________________________________________________________________ -->
-
+{% block js %}{% endblock %}
 
 <!-- Bloco de Scripts -->
 <!-- ____________________________________________________________________________________________________________________ -->
@@ -199,3 +199,7 @@
 </body>
 
 </html>
+<script>
+    // sempre pega a url da barra de endereço
+    $SCRIPT_ROOT = {{ request.script_root | tojson | safe }};
+</script>
