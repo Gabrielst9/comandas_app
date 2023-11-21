@@ -4,6 +4,7 @@ import requests
 from settings import HEADERS_API, ENDPOINT_FUNCIONARIO
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify
 from funcoes import Funcoes
+from mod_login.login import validaSessao
 
 
 bp_funcionario = Blueprint('funcionario', __name__, url_prefix="/funcionario", template_folder='templates')
@@ -16,6 +17,7 @@ bp_funcionario = Blueprint('funcionario', __name__, url_prefix="/funcionario", t
 # ROTA DE LISTAGEM DE FUNCIONÁRIOS
 #------------------------------------------------------------------------------------------------
 @bp_funcionario.route('/', methods=['GET', 'POST'])
+@validaSessao
 def formListaFuncionario():
     try:
         response = requests.get(ENDPOINT_FUNCIONARIO, headers=HEADERS_API)
@@ -33,6 +35,7 @@ def formListaFuncionario():
 # ROTA DE CADASTRO DE FUNCIONÁRIOS
 #------------------------------------------------------------------------------------------------
 @bp_funcionario.route('/form-Funcionario/', methods=['POST'])
+@validaSessao
 def formFuncionario():
     return render_template('formFuncionario.html')
 #------------------------------------------------------------------------------------------------
@@ -42,6 +45,7 @@ def formFuncionario():
 # ROTA DE INSERÇÃO DE FUNCIONÁRIOS
 #------------------------------------------------------------------------------------------------
 @bp_funcionario.route('/insert', methods=['POST'])
+@validaSessao
 def insert():
     try:
         # dados enviados via FORM
@@ -86,7 +90,7 @@ def insert():
 # ROTA DE EDIÇÃO DE FUNCIONÁRIOS
 #------------------------------------------------------------------------------------------------
 @bp_funcionario.route("/form-edit-funcionario", methods=['POST'])
-
+@validaSessao
 def formEditFuncionario():
     try:
 		# ID enviado via FORM
@@ -103,6 +107,7 @@ def formEditFuncionario():
         return render_template('formListaFuncionario.html', msgErro=e.args[0])
 
 @bp_funcionario.route('/edit', methods=['POST'])
+@validaSessao
 def edit():
 	try:
 		# dados enviados via FORM
@@ -131,6 +136,7 @@ def edit():
 #ROTA DE EXCLUÇÃO DE FUNCIONÁRIOS
 #------------------------------------------------------------------------------------------------
 @bp_funcionario.route('/delete', methods=['POST'])
+@validaSessao
 def delete():
 	try:
 		# dados enviados via FORM

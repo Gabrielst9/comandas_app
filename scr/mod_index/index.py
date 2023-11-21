@@ -1,15 +1,22 @@
+#IMPORTAÇÕES
+# ------------------------------------------------------------------------------------------------
 from flask import Blueprint, render_template
-bp_index = Blueprint('index', __name__, url_prefix="/index", template_folder='templates')
+from mod_login.login import validaSessao
+# ------------------------------------------------------------------------------------------------
 
-''' rotas dos formulários '''
+
+# blueprint index
+# ------------------------------------------------------------------------------------------------
+bp_index = Blueprint('index', __name__, url_prefix="/home", 
+template_folder='templates')
+# ------------------------------------------------------------------------------------------------
+
+
+
+# ROTA DE INDEX
+# ------------------------------------------------------------------------------------------------
 @bp_index.route('/')
-def formListaIndex():
-    return render_template('formListaIndex.html'), 200
-
-'''
-Rota antiga de app...
-@app.route('/')
-def formListaIndex():
-    # return "<h1>Rota da página Inicial da nossa WEB APP</h1>", 200
-    return render_template('formListaIndex.html'), 200
-'''
+@validaSessao
+def formIndex():
+    return render_template('formIndex.html'), 200
+# ------------------------------------------------------------------------------------------------
