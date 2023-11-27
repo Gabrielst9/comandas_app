@@ -51,6 +51,10 @@
 <!-- ____________________________________________________________________________________________________________________ -->
     <!-- Menu -->
     {% block menu %}
+
+    {% set grupo_mapping = {0: 'Atendente', 1: 'Caixa', 2: 'Adm'} %}
+    {% set grupo = grupo_mapping.get(session['grupo']) %}
+    
     <!-- Bloco de Menu Superior -->
     <nav class="border navbar navbar-expand-lg bg-dark ">
             <div class="container ">
@@ -63,33 +67,43 @@
                 >
                   <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse">
                   <div class="links w-100 text-center">
+
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
                         <li class="card nav-item"><a 
-                                class="nav-link text-warning"
-                                href="{{ url_for('index.formListaIndex') }}">
-                            <i class="fas fa-home"></i> HOME</a>
+                            class="nav-link text-warning"
+                            href="{{ url_for('index.formIndex') }}"><i class="fas fa-home">
+                            </i> HOME </a>
                         </li>
     
                         <li class="card nav-item"><a 
                             class="nav-link text-warning"
                             href="{{ url_for('funcionario.formListaFuncionario') }}"><i class="fas fa-cart-arrow-down">    
-                            </i> FUNCIONÁRIOS</a>
+                            </i> FUNCIONÁRIOS </a>
                         </li>
     
                         <li class="card nav-item"><a 
                             class="nav-link text-warning"
                             href="{{ url_for('cliente.formListaCliente') }}"><i class="fas fa-users">
-                            </i> CLIENTES</a>
+                            </i> CLIENTES </a>
                         </li>
     
                         <li class="card nav-item"><a 
                             class="nav-link text-warning"
                             href="{{ url_for('produto.formListaProduto') }}"><i class="fas fa-pizza-slice">
-                            </i> PRODUTOS</a>
+                            </i> PRODUTOS </a>
                         </li>
+
+                        <li class="card nav-item"><a 
+                            class="nav-link text-warning"
+                            href="{{ url_for('login.logoff') }}"><i class="fas fa-door-open"></i>
+                            </i> SAIR </a>
+
                     </ul>
+
                   </div>
                 </div>
                 
@@ -113,7 +127,7 @@
 <!-- ____________________________________________________________________________________________________________________ -->
     <!-- Rodapé -->
     {% block footer %}
-        <a href="{{ url_for('index.formListaIndex') }}">&copy; 2023 by Gabriel Tavares</a>
+        <a href="{{ url_for('index.formIndex') }}">&copy; 2023 by Gabriel Tavares</a>
     {% endblock %}
 <!-- ____________________________________________________________________________________________________________________ -->
 

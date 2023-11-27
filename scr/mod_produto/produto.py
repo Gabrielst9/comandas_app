@@ -4,6 +4,7 @@ import base64
 import requests
 from settings import HEADERS_API, ENDPOINT_PRODUTO
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify
+from mod_login.login import validaSessao
 
 bp_produto = Blueprint('produto', __name__, url_prefix="/produto", template_folder='templates')
 #------------------------------------------------------------------------------------------------
@@ -15,6 +16,7 @@ bp_produto = Blueprint('produto', __name__, url_prefix="/produto", template_fold
 #ROTA DE LISTAGEM DE PRODUTOS
 #------------------------------------------------------------------------------------------------
 @bp_produto.route('/', methods=['GET', 'POST'])
+@validaSessao
 def formListaProduto():
     try:
         response = requests.get(ENDPOINT_PRODUTO, headers=HEADERS_API)
@@ -32,6 +34,7 @@ def formListaProduto():
 #ROTA DE CADASTRO DE PRODUTOS
 #------------------------------------------------------------------------------------------------
 @bp_produto.route('/form-Produto/', methods=['POST'])
+@validaSessao
 def formProduto():
     return render_template('formProduto.html')
 #------------------------------------------------------------------------------------------------
@@ -41,6 +44,7 @@ def formProduto():
 #ROTA DE INSERÇÃO DE PRODUTOS
 #------------------------------------------------------------------------------------------------
 @bp_produto.route('/insert', methods=['POST'])
+@validaSessao
 def insert():
     try:
         # dados enviados via FORM
@@ -78,6 +82,7 @@ def insert():
 #ROTA DE EDIÇÃO DE PRODUTOS
 #------------------------------------------------------------------------------------------------
 @bp_produto.route("/form-edit-produto", methods=['POST'])
+@validaSessao
 def formEditProduto():
 	try:
 		# ID enviado via FORM
@@ -96,6 +101,7 @@ def formEditProduto():
 
 
 @bp_produto.route('/edit', methods=['POST'])
+@validaSessao
 def edit():
 	try:
 		# dados enviados via FORM
@@ -124,6 +130,7 @@ def edit():
 #ROTA DE EXCLUSÃO DE PRODUTOS
 #------------------------------------------------------------------------------------------------
 @bp_produto.route('/delete', methods=['POST'])
+@validaSessao
 def delete():
     try:
         # dados enviados via FORM
