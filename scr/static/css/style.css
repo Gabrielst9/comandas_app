@@ -5,6 +5,7 @@
 body{
     color: beige;
     background-image: url('../img/stacked-peaks-haikei.svg');
+    width: 100% !important;
 }
 
 
