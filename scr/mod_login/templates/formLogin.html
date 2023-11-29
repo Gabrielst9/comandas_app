@@ -7,19 +7,91 @@
 
 
 {% block menu %}
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#"><h2>Abc Bolinhas</h2></a>
+<nav class="border navbar navbar-expand-lg bg-dark ">
+    <div class="container ">
+        <a class=" text-warning navbar-brand fw-semibold" 
+                    >Pizzaria-Zé<i class="text-primary ms-2"></i
+                    ></a>
+    </div>
 </nav>
 {% endblock %}
 
 
 
 {% block content %}
-<form action="{{ url_for('login.validaLogin') }}" method="post">
-        <input placeholder="CPF" name="usuario" type="text" value="abc">
-        <input placeholder="Senha" name="senha" type="password" value="Bolinhas">
-        <br>
-        <input type="submit" value="Login">
-        
-</form>
+<div class="row">
+    <div class="col-12 col-md-10 col-lg-6 mx-auto mt-5">
+      <div class="text-md-start">
+            <form class="mt-4" name="formLogin" id="formLogin" action="{{ url_for('login.validaLogin') }}" method="post">
+
+                    <!-- CPF -->
+                    <!--================================================================================================-->
+                    <br>
+                    <div class="form-group mb-3 position-relative">
+                        <label class="form-label" for="cpf">CPF</label>
+                        <input type="text" class="form-control input" name="usuario" id="usuario" value="{{ cpf }}" placeholder="Ex.: 000.000.000-00" maxlength="11">
+                        <small id="CPFHelper" class="form-text text-light">Digite somente números</small>
+                    </div>
+                    <!--================================================================================================-->
+                    
+                    <!-- Senha -->
+                    <!--================================================================================================-->
+                    <br>
+                    <div class="form-group mb-3 position-relative">
+                        <label class="form-label" for="senha">Senha</label>
+                        <input class="form-control input" type="password" name="senha" id="senha" value="{{ senha }}" placeholder="Senha">
+                    </div>
+                    <!--================================================================================================-->
+                    
+                    <button type="submit" value="login" class="botao btn btn-outline-primary text-light px-5">Entrar</button>
+            
+            </form>
+      </div>
+    </div>
+    </div>
 {% endblock %}
+
+
+{% block js %}
+
+{% if request.args.get('msgErro'): %}
+<script>
+Swal.fire("Erro", "{{ request.args.get('msgErro') }}", "error");
+</script>
+{%endif%}
+
+<script>
+   $('#formLogin').submit(function (e) {
+       e.preventDefault();
+       var form = $('#formLogin')[0];
+       var data = new FormData(form);
+       console.log(data);
+       $.ajax({
+           type: "POST", enctype: 'multipart/form-data',
+           url: "{{url_for('login.validaLogin')}}",
+           data: data,
+           processData: false,
+           contentType: false,
+           cache: false,
+           timeout: 600000,
+           // manipular o retorno da requisição
+           success: function (data) {
+               if (data.erro) {
+                   Swal.fire({
+                       text: data.msgErro,
+                       icon: "error"
+                   });
+               } else {
+                   window.location.replace($SCRIPT_ROOT + "{{ url_for('index.formIndex') }}");
+               }
+           },
+           // manipular erros da requisição
+           error: function (e) {
+               console.log(e);
+           }
+       })
+   })
+
+</script>
+
+{%endblock%}
